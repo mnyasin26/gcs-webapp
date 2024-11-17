@@ -1,0 +1,26 @@
+services:
+  gcs-webapp:
+    build: .
+    container_name: gcs-webapp
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8000:8000"
+      - "5173:5173"
+    networks:
+      # - amqs_net
+      - gcs_net
+      - db_net
+      - nginx_net
+
+networks:
+  gcs_net:
+    name: gcs_net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.2.0/24
+  db_net:
+    external: true
+  nginx_net:
+    external: true

@@ -1,0 +1,19 @@
+
+version: '3.8'
+
+services:
+  tsp_service:
+    build: .
+    container_name: tsp_service
+    ports:
+      - "8001:80"
+    networks:
+      - gcs_net
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+
+networks:
+  gcs_net:
+    external: true
